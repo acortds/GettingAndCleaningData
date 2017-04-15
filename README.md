@@ -38,7 +38,8 @@ You may need to restart R or R Studio after this is done.
 | File Name | Description                                         |
 |-----------|-----------------------------------------------------|
 | RawData.csv | All individual files merged into one single data set. |
-| TidyData.csv | File with the average of each dimension (variable) for each activity and each subject. |
+| TidyData.csv | CSV File with the average of each dimension (variable) for each activity and each subject. |
+| TidyData.txt | Text File with the average of each dimension (variable) for each activity and each subject. |
 
 # Execution
 run_analysis.R contains all the instructions to download, merge and produce aforementioned files. All you need to do is execute (source) run_analysis.R and it will create the two files, RawData.csv and TidyData.csv.

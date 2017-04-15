@@ -61,7 +61,7 @@ XTrainData  <- cbind(TrainActSub, Xtrain)
 RawData     <- rbind(XTestData, XTrainData)
 
 setwd(pwd)
-write.csv(RawData, "RawData.csv")
+write.csv(RawData, "RawData.csv", row.names = FALSE)
 
 # remove variables no longer used
 rm(list = ls(pattern = "^X(.*)|^Y(.*)|^C(.*)|^S(.*)|^T(.*)"))
@@ -84,4 +84,5 @@ TidyData <- RawData %>%
     average_std_dev = std
   )
 
-write.csv(TidyData, "TidyData.csv")
+write.csv(TidyData, "TidyData.csv", row.names = FALSE)
+write.table(TidyData, "TidyData.txt", row.names = FALSE)

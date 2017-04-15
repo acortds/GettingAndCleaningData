@@ -163,7 +163,7 @@ Finally, we can merge the test and train data sets into one single data set. Thi
 RawData     <- rbind(XTestData, XTrainData)
 
 setwd(pwd)
-write.csv(RawData, "RawData.csv")
+write.csv(RawData, "RawData.csv", row.names = FALSE)
 ```
 
 ## Section 4 - Transform Raw Data into Tidy Data
@@ -260,8 +260,9 @@ TidyData <- RawData %>%
   )
 ```
 
-To conclude the analysis, we save the data into a csv file.
+To conclude the analysis, we save the data into a csv file. The txt version of the data is for assigment submission.
 
 ```r
-write.csv(TidyData, "TidyData.csv")
+write.csv(TidyData, "TidyData.csv", row.names = FALSE)
+write.table(TidyData, "TidyData.txt", row.names = FALSE)
 ```
