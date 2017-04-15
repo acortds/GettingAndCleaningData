@@ -6,7 +6,7 @@ Author: "Adrian Cortinas"
 # Description
 This repository is for John Hopkins' Getting and Cleaning Data Course project assignment files. 
 
-To complete this assignment we have to create an R script that performs the following:
+For this assignment we have to create an R script that performs the following:
 1. Merge two or more data sets to create one data set.
 2. Extract only the measurements on the mean and standard deviation for each measurement.
 3. Use descriptive activity names to name the activities in the data set
