@@ -14,38 +14,48 @@ The code is composed of 4 sections.
 # Variables
 
 ## Work variables
-* pwd - Directory where the analysis_run.R file was executed.
-* fileURL - URL of the compressed data file
+| Variable Name | Description|
+|---------------|--------|
+| pwd | Directory where the analysis_run.R file was executed.|
+| fileURL | URL of the compressed data file|
 
 ## Data File Location
-* LabelURL    - URL to activity description file.
-* ColNamesURL - URL to "features.txt" file.
-* XtestURL    - URL to "test/X_test.txt" file. This is the Test data set.
-* YtestURL    - URL to "test/y_test.txt" file. This is the Test activity id.
-* SubTestURL  - URL to "test/subject_test.txt" file. This identifies the subject that performed the Test activity.
-* XtrainURL   - URL to "train/X_train.txt" file. This is the Training data set.
-* YtrainURL   - URL to "train/y_train.txt" file. This is the Training activity id.
-* SubTrainURL - URL to "train/subject_train.txt" file. This identifies the subject that performed the Training activity.
+| Variable Name | Description|
+|---------------|--------|
+| LabelURL      | URL to activity description file.|
+| ColNamesURL   | URL to "features.txt" file.|
+| XtestURL      | URL to "test/X_test.txt" file. This is the Test data set.|
+| YtestURL      | URL to "test/y_test.txt" file. This is the Test activity id.|
+| SubTestURL    | URL to "test/subject_test.txt" file. This identifies the subject that performed the Test activity.|
+| XtrainURL     | URL to "train/X_train.txt" file. This is the Training data set.|
+| YtrainURL     | URL to "train/y_train.txt" file. This is the Training activity id.|
+| SubTrainURL   | URL to "train/subject_train.txt" file. This identifies the subject that performed the Training activity.|
 
 ## Raw Data Variables
-* ColNames    - Data from ColNamesURL. Contains two columns, V1 is the sequential id, V2 is the name of the function.
-* LabelDesc   - Data from LabelURL. Contains two columns, act_id which is the id of the activity, and activity, which is the description.
-* Ytrain      - Data from YtrainURL. Contains one column, the activity id.
-* Ytest       - Data from YtestURL. Contains one column, the activity id.
-* Xtrainsub   - Data from SubTrainURL. Contains one column, the subject id.
-* Xtestsub    - Data from SubTestURL. Contains one column, the subject id.
-* Xtrain      - Data from XtrainURL. Contains 561 columns. This is actual the Training data set. 
-* Xtest       - Data from XtestURL. Contains 561 columns. This is actual the Test data set.
+| Variable Name | Description|
+|---------------|--------|
+| ColNames      | Data from ColNamesURL. Contains two columns, V1 is the sequential id, V2 is the name of the function.|
+| LabelDesc     | Data from LabelURL. Contains two columns, act_id which is the id of the activity, and activity, which is the description.|
+| Ytrain        | Data from YtrainURL. Contains one column, the activity id.|
+| Ytest         | Data from YtestURL. Contains one column, the activity id.|
+| Xtrainsub     | Data from SubTrainURL. Contains one column, the subject id.|
+| Xtestsub      | Data from SubTestURL. Contains one column, the subject id.|
+| Xtrain        | Data from XtrainURL. Contains 561 columns. This is actual the Training data set. |
+| Xtest         | Data from XtestURL. Contains 561 columns. This is actual the Test data set.|
 
 ## Intermediate Data Variables
-* TestActSub  - Merged data from Ytest and Xtestsub data sets. Data represents activity id done by subject id.
-* TrainActSub - Merged data from Ytrain and Xtrainsub data sets. Data represents activity id done by subject id.
-* XTestData   - Column level Merged data from TestActSub and Xtest data sets.
-* XTrainData  - Column level Merged data from TrainActSub and Xtrain data sets.
+| Data Set      | Description|
+|---------------|--------|
+| TestActSub    | Merged data from Ytest and Xtestsub data sets. Data represents activity id done by subject id.|
+| TrainActSub   | Merged data from Ytrain and Xtrainsub data sets. Data represents activity id done by subject id.|
+| XTestData     | Column level Merged data from TestActSub and Xtest data sets.|
+| XTrainData    | Column level Merged data from TrainActSub and Xtrain data sets.|
 
 ## Data Variables
-* RawData     - Row level Merged data from XTestData and XTrainData data sets.
-* TidyData    - Tidied up data from RawData representing the average of each variable for each activity and each subject
+| Data Set     | Description|
+|--------------|--------|
+| RawData      | Row level Merged data from XTestData and XTrainData data sets.|
+| TidyData     | Tidied up data from RawData representing the average of each variable for each activity and each subject|
 
 # Transformation
 
@@ -113,7 +123,7 @@ ColNames$V2 <- gsub(":$", "", ColNames$V2)
 ColNames$V2 <- gsub(",", "C", ColNames$V2)
 ```
 
-Also, it's easier if we use common names for same data. When loading the following data sets we specify the name of their columns
+Also, it's easier if we use common names for similar data. When loading the following data sets we specify the name of their columns
 
 ```r
 LabelDesc   <- read.table(LabelURL    , col.names = c("act_id", "activity"))
@@ -142,8 +152,8 @@ Once we have activity and subject ids merged, we join them to the actual test/tr
 
 ```r
 # Merge ActSub + Data Set
-XTestData   <- cbind(TestActSub,  Xtest)
-XTrainData  <- cbind(TrainActSub, Xtrain)
+XTestData   <- cbind(TestActSub  , Xtest)
+XTrainData  <- cbind(TrainActSub , Xtrain)
 ```
 
 Finally, we can merge the test and train data sets into one single data set. This is the first task specified in the assignment. We save this data into disk for later analysis.
@@ -190,10 +200,13 @@ Transforms all columns to rows and place them into two variables, test and value
 ```
 
 Splits test column into 4 columns. 
-* Domain is the feature, either the time domain signal or frequency domain signal.
-* funct is the function applied to the Domain.
-* axis describes to what axis or other element was the function applied to.
-* other is a catch-all column.
+| Variable Name | Description|
+|---------------|--------|
+| domain        | is the feature, either the time domain signal or frequency domain signal.|
+| funct         | is the function applied to the Domain.|
+| axis          | describes to what axis or other element was the function applied to.|
+| other         | a catch-all column.|
+
 ```r
 separate(test,c("domain","funct","axis","other"),fill="right") %>%
 ```
