@@ -208,7 +208,7 @@ Splits test column into 4 columns.
 | other         | a catch-all column.|
 
 ```r
-separate(test,c("domain","funct","axis","other"),fill="right") %>%
+   separate(test,c("domain","funct","axis","other"),fill="right") %>%
 ```
 
 Select only those rows that contains the words "mean" and "std" (Step 2):
@@ -218,7 +218,7 @@ Select only those rows that contains the words "mean" and "std" (Step 2):
 
 Groups the resulting data set by these columns:
 ```r
-group_by(activity, sub_id, domain, funct) %>% 
+   group_by(activity, sub_id, domain, funct) %>% 
 ```
 
 Gets the mean of the value column by the previously grouped columns:
